@@ -1,6 +1,4 @@
- 
-
-    - name: Chec name: CI/CD Pipeline 
+name: CI/CD Pipeline 
 
  
 
@@ -28,7 +26,9 @@ jobs:
 
  
 
-kout Code 
+    steps: 
+
+    - name: Checkout Code 
 
       uses: actions/checkout@v2       # Check out the repository code 
 
