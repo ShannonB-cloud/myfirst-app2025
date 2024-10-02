@@ -1,33 +1,69 @@
- - name: Delete Temporary Files          # New cleanup task for temp files 
-
-        run: | 
-
-          echo "Deleting temp files older than 7 days..."  # Print message to log 
-
-          if [ -d "temp/" ]; then 
-
-            find temp/ -type f -mtime +7 -delete           # Find and delete temp files older than 7 days 
-
-          else 
-
-            echo "Directory temp/ does not exist."         # Print message if directory does not exist 
-
-          fi 
-
+name: Cleanup Old Log Files     # The name of the workflow
  
+on:                             # The workflow will trigger when code is pushed
 
-      - name: Delete Cache Files              # New cleanup task for cache files 
+  push:                         
 
-        run: | 
+    branches:                   
 
-          echo "Deleting cache files older than 7 days..."  # Print message to log 
+      - main                    # It will only run on the main branch
+ 
+jobs:                           
 
-          if [ -d "cache/" ]; then 
+  cleanup:                      # The name of the job
 
-            find cache/ -type f -mtime +7 -delete           # Find and delete cache files older than 7 days 
+    runs-on: ubuntu-latest      # The environment in which the job runs
+ 
+    steps:                      
 
-          else 
+      - name: Checkout Repository    
 
-            echo "Directory cache/ does not exist."         # Print message if directory does not exist 
+        uses: actions/checkout@v3  # Checks out the repository code
+ 
+      - name: Delete Old Log Files  
 
-          fi 
+        run: |                     
+
+          echo "Deleting log files older than 7 days..."  # Print message to log
+
+          if [ -d "logs/" ]; then
+
+            find logs/ -type f -mtime +7 -delete          # Finds and deletes files older than 7 days in the 'logs' directory
+
+          else
+
+            echo "Directory logs/ does not exist."        # Print message if directory does not exist
+
+          fi
+ 
+      - name: Delete Temporary Files          # New cleanup task for temp files
+
+        run: |
+
+          echo "Deleting temp files older than 7 days..."  # Print message to log
+
+          if [ -d "temp/" ]; then
+
+            find temp/ -type f -mtime +7 -delete           # Find and delete temp files older than 7 days
+
+          else
+
+            echo "Directory temp/ does not exist."         # Print message if directory does not exist
+
+          fi
+ 
+      - name: Delete Cache Files              # New cleanup task for cache files
+
+        run: |
+
+          echo "Deleting cache files older than 7 days..."  # Print message to log
+
+          if [ -d "cache/" ]; then
+
+            find cache/ -type f -mtime +7 -delete           # Find and delete cache files older than 7 days
+
+          else
+
+            echo "Directory cache/ does not exist."         # Print message if directory does not exist
+
+          fi
