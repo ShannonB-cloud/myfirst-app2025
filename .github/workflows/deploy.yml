@@ -76,8 +76,6 @@ jobs:
 
         with: 
 
-
-
-            app-name: "my-first-app2025" 
+          app-name: "my-first-app2025" 
 
           package: . 
