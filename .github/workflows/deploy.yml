@@ -78,4 +78,4 @@ jobs:
 
           app-name: "my-web-app2025" 
 
-          package: . 
+          package: .
