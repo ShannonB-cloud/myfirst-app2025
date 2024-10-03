@@ -85,3 +85,7 @@ jobs:
         if: failure()  # Roll back if the previous step fails 
 
         run: echo "Rolling back to the previous stable version..."
+
+      - name: Deploy if tests pass 
+
+        if: success()  # Only deploy if tests pass 
